@@ -16,7 +16,7 @@ def get_index():
 # TODO: figure out a better way to route multiple URLs
 @app.route('/')
 def get_slash():
-    return redirect_(url_for('index'))
+    return render_template('about.html')
 
 @app.route('/music.html')
 def get_music():
