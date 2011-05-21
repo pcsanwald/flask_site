@@ -13,6 +13,11 @@ app.config.from_object(__name__)
 def get_index():
     return render_template('about.html')
 
+# TODO: figure out a better way to route multiple URLs
+@app.route('/')
+def get_slash():
+    return redirect_(url_for('index'))
+
 @app.route('/music.html')
 def get_music():
     return render_template('music.html')
