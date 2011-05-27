@@ -1,7 +1,7 @@
 /* Author: Paul Sanwald
 */
 function changeColorHandler(themeJSON) {
-    page = "themes/" + themeJSON;
+    var page = "/themes/" + themeJSON;
     $.getJSON(page, function(data) {
         colorScheme(data);
     });
@@ -21,7 +21,7 @@ function colorScheme(scheme) {
 }
 
 function displayThemes() {
-    $.getJSON('themes/list.json', function(data) {
+    $.getJSON('/themes/list.json', function(data) {
         var themeList = [];
         $.each(data,function(key,value) {
             themeList.push('<a href="'+ value +'" class="changeTheme">'+ key +'</a>');
@@ -33,6 +33,7 @@ function displayThemes() {
            createCookie("theme",$(this).attr("href"),30);
            return false;
        });
+       changeColorHandler(theme);
     });
 
 }
@@ -58,8 +59,9 @@ function readCookie(name) {
     var ca = document.cookie.split(';');
     for(var i=0;i < ca.length;i++) {
         var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        // using === to avoid type coercion; much respect to crockford on js
+        while (c.charAt(0)===' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
     }
     return null;
 }
@@ -109,6 +111,9 @@ $(function() {
        });
        return false;
    });
+   // displayThemes also changes the colors of the page based on user prefs.
+   // the reason it does that is that function should be called only after
+   // we are done fiddling with the content of the page.
+   // TODO: figure out a better way to make changeColorHandler come at the very end.
    displayThemes();
-    changeColorHandler(theme);
 });

@@ -145,7 +145,7 @@ select, input, textarea {
 }
 
 /* Headers (h1, h2, etc) have no default font-size or margin; define those yourself */
-h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+h1, h2, /*h3,*/ h4, h5, h6 { font-weight: bold; }
 
 
 /* These selection declarations have to be separate
@@ -270,6 +270,14 @@ footer {
     clear: both;
 }
 
+.posts h2 {
+ #   text-align: center;
+    padding-top: 2%;
+    padding-bottom: 1%;
+}
+.posts h3 {
+    font-size: 80%
+}
 /**
  * Non-semantic helper classes: please define your styles before this section.
  */
