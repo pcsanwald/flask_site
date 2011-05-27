@@ -1,3 +1,5 @@
+from __future__ import with_statement
+from contextlib import closing
 import datetime
 import uuid
 from flask import Flask, request, session, g, redirect, url_for, \
