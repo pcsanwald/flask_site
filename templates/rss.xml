@@ -11,8 +11,8 @@
         <item>
                 <title>{{post.title}}</title>
                 <description>{{ post.text|safe}}</description>
-                <link>http://paulsanwald.com/blog.html</link>
-                <guid isPermaLink="false">{{post.uuid}}</guid>
+                <link>http://paulsanwald.com/blog/{{post.id}}.html</link>
+                <guid>http://paulsanwald.com/blog/{{post.id}}.html</guid>
                 <pubDate>{{post.pub_date}}</pubDate>
         </item>
         {% endfor %}

@@ -1,11 +1,17 @@
 {% extends "index.html" %}
 {% block body %}
-<img src="images/paul_cooking.jpg" alt="a picture of me making eggs" class="right" height="200px"/>
+<img src="/images/paul_cooking.jpg" alt="a picture of me making eggs" class="right" height="200px"/>
 <div class="posts">
 {% for post in posts%}
-    <h2>{{post.title}} </h2>
-    <h3>by {{post.author}}, on {{post.display_date}}</h3>
-    <p>{{ post.text|safe }}</p>
+    <div id={{post.id}}>
+        <h2>{{post.title}} </h2>
+        {% if session.logged_in %}
+        <a href="/admin/post/{{post.id}}/delete">delete</a> |
+        <a href="/admin/post/{{post.id}}/edit">edit</a>
+        {% endif %}
+        <h3>by {{post.author}}, on {{post.display_date}}</h3>
+        <p>{{ post.text|safe }}</p>
+    </div>
 {% else %}
     <h2>No Posts.</h2> <p> No posts here so far</p>
 {% endfor %}

@@ -1,5 +1,6 @@
 from __future__ import with_statement
 from contextlib import closing
+from functools import wraps
 import datetime
 import uuid
 from flask import Flask, request, session, g, redirect, url_for, \
@@ -18,6 +19,16 @@ app.config.from_object(__name__)
 app.config.from_envvar('MYSITE_SETTINGS',silent=True)
 
 # This section handles routing for the basic site pages
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args,**kwargs):
+        # TODO: look at storing the user in g.user instead of session
+        # if g.user is None:
+        if not session.get('logged_in'):
+            return redirect(url_for('login',next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.route('/index.html')
 def index():
@@ -46,25 +57,51 @@ def blog():
 def basic_rss():
     return render_template('rss.xml',posts=get_posts())
 
+@app.route('/admin/post/<int:post_id>/delete')
+@login_required
+def delete_post(post_id):
+    g.db.execute('delete from post where id=?',[post_id])
+    g.db.commit()
+    return render_template('admin/post.html',post=(),posts=get_posts())
+
+@app.route('/admin/post/<int:post_id>/edit',methods=['GET','POST'])
+@login_required
+def edit_post(post_id):
+    if request.method == 'GET':
+        return render_template('admin/post.html',post=get_post(post_id),posts=get_posts())
+    elif request.method == 'POST':
+        query = 'update post set title=?, text=?, author=? where id=?'
+        g.db.execute(query,
+            [request.form['title'],request.form['text'],request.form['author'],post_id])
+        g.db.commit()
+        return render_template('admin/post.html',post=get_post(post_id),posts=get_posts())
+
 @app.route('/admin/post.html',methods=['GET','POST'])
+@login_required
 def add_post():
-    if not session.get('logged_in'):
-        return redirect(url_for('login')) 
     if request.method == 'POST':
         g.db.execute('insert into post(title,date,text,author) values (?,?,?,?)',
             [request.form['title'],datetime.datetime.now(),request.form['text'],request.form['author']])
         g.db.commit()
         return redirect(url_for('add_post'))
     else:
-        return render_template('admin/post.html',posts=get_posts())
+        return render_template('admin/post.html',post=(),posts=get_posts())
+
+def get_post(post_id):
+    result = query_db('select id, title, date, text, author from post where id=%d' % (post_id))
+    return create_post(result[0]) 
 
 def get_posts():
     # hardcoding UTC since python doesn't ship with tzinfo classes (wtf!?)
     results = query_db('select id, title, date, text, author from post order by id desc')
     for result in results:
-        result['display_date'] = result['date'].strftime("%m.%d.%Y")
-        result['pub_date'] = result['date'].strftime('%a, %d %b %Y %H:%M:%S EST') 
+        result = create_post(result)
     return results
+
+def create_post(result):
+    result['display_date'] = result['date'].strftime("%m.%d.%Y")
+    result['pub_date'] = result['date'].strftime('%a, %d %b %Y %H:%M:%S EST') 
+    return result
 
 """
 login/logout functions

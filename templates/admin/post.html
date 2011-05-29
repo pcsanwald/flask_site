@@ -6,21 +6,25 @@
   {% else %}
     <a href="{{ url_for('logout') }}">log out</a>
   {% endif %}
+  | <a href="/admin/post.html">new post</a>
 </div>
 
-{% if session.logged_in %}
-<form action="{{ url_for('add_post') }}" method=post class=add-entry>
+{% if post and post.id %} 
+    <form action="{{ url_for('edit_post',post_id=post.id) }}" method=post class=add-entry>
+{% else %}
+    <form action="{{ url_for('add_post') }}" method=post class=add-entry>
+{% endif %}
+  <input type=hidden name=post_id value={{post.id|default('')}}/>
   <dl>
     <dt>Title:</dt>
-    <dd><input type=text size=30 name=title></dd>
+    <dd><input type=text size=30 name=title value="{{post.title|default('')}}"></dd>
     <dt>Author:</dt>
-    <dd><input type=text size=30 name=author></dd>
+    <dd><input type=text size=30 name=author value="{{post.author|default('')}}"></dd>
     <dt>Text:</dt>
-    <dd><textarea name=text rows=5 cols=40></textarea></dd>
-    <dd><input type=submit value=Share></dd>
+    <dd><textarea name=text rows=30 cols=60>{{post.text|default('')}}</textarea></dd>
+    <dd><input type=submit value="post"></dd>
   </dl>
 </form>
-{% endif %}
 
 {{ super() }}
 {% endblock %}
