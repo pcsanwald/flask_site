@@ -9,11 +9,7 @@
   | <a href="/admin/post.html">new post</a>
 </div>
 
-{% if post and post.id %} 
-    <form action="{{ url_for('edit_post',post_id=post.id) }}" method=post class=add-entry>
-{% else %}
-    <form action="{{ url_for('add_post') }}" method=post class=add-entry>
-{% endif %}
+    <form action="" method=post>
   <input type=hidden name=post_id value={{post.id|default('')}}/>
   <dl>
     <dt>Title:</dt>

@@ -6,12 +6,12 @@ import uuid
 from flask import Flask, request, session, g, redirect, url_for, \
     abort, render_template, flash, jsonify
 from db_utils import *
+import os
 
-# config TODO: move this to its own file
-DEBUG = True
-DATABASE = '/Users/paulsanwald/Code/apache/wsgi/mysite.db'
+DEBUG = False 
+DATABASE = '/home/psanwald/paulsanwald/mysite.db'
 SECRET_KEY = 'development key'
-USERNAME = 'admin'
+USERNAME = 'paul'
 PASSWORD = 'default'
 
 app = Flask(__name__)
