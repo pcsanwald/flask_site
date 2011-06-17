@@ -195,6 +195,23 @@ p, ul {
     display: none;
 }
 
+.unstyled ul {
+}
+.unstyled li {
+    display: inline;
+    padding: 5px;
+    margin: 5px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 3px 5px rgba(0,0,0,.25);
+    -moz-box-shadow: 0 3px 5px rgba(0,0,0,.25);
+    box-shadow: 0 3px 5px rgba(0,0,0,.25);
+    z-index: 0;
+    background-color: aliceblue;
+    text-align: center;
+}
+
 body {  
     /* http://blog.gesteves.com/post/36097597/helvetica-neue-light */
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
@@ -271,7 +288,6 @@ footer {
 }
 
 .posts h2 {
- #   text-align: center;
     padding-top: 2%;
     padding-bottom: 1%;
 }

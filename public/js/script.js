@@ -18,6 +18,9 @@ function colorScheme(scheme) {
     $("dt").css("color",scheme["link"]);
     $("a:hover").css("color",scheme["linkHover"]);
     $("#main img").css("background-color",scheme["highlighted"]);
+    $(".unstyled li").css("background-color",scheme["link"]);
+    $(".unstyled li").css("color",scheme["foreground"]);
+    $(".unstyled a").css("color",scheme["foreground"]);
 }
 
 function displayThemes() {

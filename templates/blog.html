@@ -11,6 +11,11 @@
         {% endif %}
         <h3>by {{post.author}}, on {{post.display_date}}</h3>
         <p>{{ post.text|safe }}</p>
+        <ul class="unstyled">
+        {% for tag in post.tags %}
+            <li>{{tag.name}}</li>
+        {% endfor %}
+        </ul>
     </div>
 {% else %}
     <h2>No Posts.</h2> <p> No posts here so far</p>

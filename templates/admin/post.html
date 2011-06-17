@@ -1,13 +1,17 @@
 {% extends "blog.html" %}
 {% block body %}
-<div id="adminControls">
+<ul class="unstyled">
+<li>
 {% if not session.logged_in %}
     <a href="{{ url_for('login') }}">log in</a>
   {% else %}
     <a href="{{ url_for('logout') }}">log out</a>
   {% endif %}
-  | <a href="/admin/post.html">new post</a>
-</div>
+</li>
+<li>
+  <a href="/admin/post.html">new post</a>
+</li>
+</ul>
 
     <form action="" method=post>
   <input type=hidden name=post_id value={{post.id|default('')}}/>
@@ -19,6 +23,12 @@
     <dt>Text:</dt>
     <dd><textarea name=text rows=30 cols=60>{{post.text|default('')}}</textarea></dd>
     <dd><input type=submit value="post"></dd>
+    <ul class="unstyled">
+    {% for tag in tags %}
+        <li> {{tag.name}} <input type=checkbox name="tags" value="{{tag.id}}"
+        {% if tag.id in post.tag_ids %}checked{% endif %}></li>
+    {% endfor %}
+    </ul>
   </dl>
 </form>
 
