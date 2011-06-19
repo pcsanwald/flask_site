@@ -2,7 +2,7 @@ drop table if exists post;
 create table post (
     id integer primary key autoincrement,
     title string not null,
-    text string not null,
+    text longtext not null,
     date timestamp not null,
     author string not null
 );
@@ -23,3 +23,7 @@ create table post_tag(
 insert into tag(name) values ('music');
 insert into tag(name) values ('fitness');
 insert into tag(name) values ('technology');
+
+attach database 'old_posts/old_posts.db' as op;
+
+insert into post(title,text,date,author) select post_title,post_content,post_date,'paul' from op.wp_posts where post_status='publish' order by post_date asc;
