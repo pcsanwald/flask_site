@@ -20,4 +20,3 @@ def connect_db(app):
     # the PARSE declarations allow for python datetime -> sqlite3 TIMESTAMP conversions
     return sqlite3.connect(app.config['DATABASE'],detect_types=sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)
 
-
