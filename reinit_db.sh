@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sqlite3 mysite.db .dump > mysite.sql.bak
 rm mysite.db
 cat old_posts.sql | sqlite3 old_posts.db
 sqlite3 mysite.db < mysite.sql

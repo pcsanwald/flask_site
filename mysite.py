@@ -53,6 +53,10 @@ Blogging section
 def blog():
     return render_template('blog.html',posts=get_posts())
 
+@app.route('/blog/<int:post_id>.html')
+def blog_post(post_id):
+    return render_template('blog.html',posts=[get_post(post_id=post_id)])
+
 @app.route('/feed.rss')
 def basic_rss():
     return render_template('rss.xml',posts=get_posts())

@@ -161,27 +161,31 @@ h1, h2, /*h3,*/ h4, h5, h6 { font-weight: bold; }
 ::selection { background:#444; color:#fff; text-shadow: none; }
 
 /* j.mp/webkit-tap-highlight-color */
-a:link { -webkit-tap-highlight-color: #549755; }
-
+a:link { -webkit-tap-highlight-color: #768fb2; }
 a, a:active, a:visited { 
-    color: #c6b448;
+    color: #768fb2;
     outline: none;
     text-decoration: none;
 }
 a:hover { color: #584435; }
-
 body {
     color: #d1cdb5;
-    background-color: #1d1511;
+    background-color: #74A1D5;
 }
 #main img {
-    background-color: #1d1511;
+    background-color: #74A1D5;
 }
-
 #container {
-    background: #817972;
+    background: #D9dce3;
 }
-
+.posts h2 a,a:active,a:visited {
+    background-color: #555863;
+    color: #74A1D5;
+}
+.unstyled li {
+    background-color: #555863;
+    color: #74A1D5;
+}
 /**
  * Primary styles
  * Author: paul sanwald 
@@ -208,7 +212,6 @@ p, ul {
     -moz-box-shadow: 0 3px 5px rgba(0,0,0,.25);
     box-shadow: 0 3px 5px rgba(0,0,0,.25);
     z-index: 0;
-    background-color: aliceblue;
     text-align: center;
 }
 
@@ -288,8 +291,21 @@ footer {
 }
 
 .posts h2 {
-    padding-top: 2%;
-    padding-bottom: 1%;
+    padding-bottom: 15px;
+}
+.posts h2 a {
+    padding: 5px;
+    padding-right: 10%;
+    padding-left: 2%;
+    margin: 5px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 3px 5px rgba(0,0,0,.25);
+    -moz-box-shadow: 0 3px 5px rgba(0,0,0,.25);
+    box-shadow: 0 3px 5px rgba(0,0,0,.25);
+    z-index: 0;
+/*    text-align: center; */
 }
 .posts h3 {
     font-size: 80%
