@@ -21,8 +21,6 @@ function colorScheme(scheme) {
     $(".unstyled li").css("background-color",scheme["link"]);
     $(".unstyled li").css("color",scheme["foreground"]);
     $(".unstyled a").css("color",scheme["foreground"]);
-    $(".posts h2 a").css("background-color",scheme["link"]);
-    $(".posts h2 a:link").css("color",scheme["foreground"]);
 }
 
 function displayThemes() {
