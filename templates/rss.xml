@@ -13,7 +13,7 @@
                 <description>{{ post.text|safe}}</description>
                 <link>http://paulsanwald.com/blog/{{post.id}}.html</link>
                 <guid>http://paulsanwald.com/blog/{{post.id}}.html</guid>
-                <pubDate>{{post.pub_date}}</pubDate>
+                <pubDate>{{post.date}}</pubDate>
         </item>
         {% endfor %}
  
