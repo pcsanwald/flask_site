@@ -179,7 +179,7 @@ body {
     background: #D9dce3;
 }
 .unstyled li {
-    background-color: #555863;
+    background-color: #555863; opacity: .5;
     color: #74A1D5;
 }
 /**

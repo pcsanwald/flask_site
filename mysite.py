@@ -48,8 +48,17 @@ class Post(db.Model):
         return '<Post %r>' % (self.title)
 
     def display_date(self):
-        print date.strftime("%m.%d.%Y")
-        return date.strftime("%m.%d.%Y")
+        print self.date.strftime("%m.%d.%Y")
+        return self.date.strftime("%m.%d.%Y")
+
+    def display_tags(self):
+        if len(self.tags) == 0:
+            return ""
+        tag_names = [tag.name for tag in self.tags]
+        return "Categories: "+ ", ".join(tag_names)
+
+    def tag_ids(self):
+        return [tag.id for tag in self.tags]
 
 class Tag(db.Model):
     id = db.Column(db.Integer,primary_key=True)
@@ -59,7 +68,7 @@ class Tag(db.Model):
         self.name = name
 
     def __repr__(self):
-        return '<Tag %r %r>' % (self.id,self.title)
+        return '<Tag %r %r>' % (self.id,self.name)
 
 
 # This section handles routing for the basic site pages
@@ -121,6 +130,8 @@ def edit_post(post_id):
         post = Post.query.get(post_id)
         post.title = request.form['title']
         post.text = request.form['text']
+        
+        post.tags = [Tag.query.get(tag_id) for tag_id in request.form.getlist('tags')]
         db.session.commit()
         return redirect(url_for('add_post'))
 
@@ -129,11 +140,15 @@ def edit_post(post_id):
 def add_post():
     if request.method == 'POST':
         post = Post(request.form['title'],request.form['text'])
+        for tag_id in request.form.getlist('tags'):
+            print "TAG: %s details: %s" % (tag_id,Tag.query.get(tag_id))
+        post.tags = [Tag.query.get(tag_id) for tag_id in request.form.getlist('tags')]
+        print "post tags are: %s" % (str(post.tags))
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('add_post'))
     else:
-        return render_template('admin/post.html',post=(),posts=get_posts(),tags=Tag.query.all())
+        return render_template('admin/post.html',post=Post('',''),posts=get_posts(),tags=Tag.query.all())
 
 def get_posts():
     return Post.query.order_by(desc('date')).all()

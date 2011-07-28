@@ -24,7 +24,7 @@
     <ul class="unstyled">
     {% for tag in tags %}
         <li> {{tag.name}} <input type=checkbox name="tags" value="{{tag.id}}"
-        {% if tag.id in post.tag_ids %}checked{% endif %}></li>
+        {% if tag.id in post.tag_ids() %}checked{% endif %}></li>
     {% endfor %}
     </ul>
   </dl>
