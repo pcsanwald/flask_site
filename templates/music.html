@@ -20,7 +20,6 @@ The recording I am most proud of is a song I wrote called "Three"
         <li><a href="mp3s/three.mp3">three</a> (2003) - a recording of a tune I wrote when I was at the new school</li>
         <li><a href="mp3s/thin_ice.mp3">on thin ice</a> (2004) - a tune of mine I arranged for septet, this is a minidisc of us at a gig</li>
         <li><a href="mp3s/small_hotel.mp3">there's a small hotel</a> - me playing solo</li>
-        <li><a href="mp3s/blackbird.mp3">bye bye blackbird</a> - trio with scott schaeffer and wataru uchida</li>
         </ul>
         
         <h2><a href="#wedding_music" class="collapser">Wedding Music</a></h2>
@@ -81,4 +80,9 @@ The recording I am most proud of is a song I wrote called "Three"
          <li><a href="pdfs/woody_missjones.pdf">Woody Shaw's solo on "Have You Met Miss Jones?"</a> (<a href="mp3s/woody_missjones.mp3">mp3</a>)</li>
          <li><a href="pdfs/red_paul_foggy_day.pdf">Red Garland and Paul Chambers on "A Foggy Day"</a> (<a href="mp3s/red_paul_foggy_day.mp3">mp3</a>)</li>
         </ul>
+        <br/>
+    {% if posts %}
+        <h4> Recent posts on music:</h4>
+        {% include 'posts.html' %}
+    {% endif %}
 {% endblock %}

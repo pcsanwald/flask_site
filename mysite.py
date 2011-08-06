@@ -48,7 +48,6 @@ class Post(db.Model):
         return '<Post %r>' % (self.title)
 
     def display_date(self):
-        print self.date.strftime("%m.%d.%Y")
         return self.date.strftime("%m.%d.%Y")
 
     def display_tags(self):
@@ -93,11 +92,13 @@ def slash():
 
 @app.route('/music.html')
 def music():
-    return render_template('music.html')
+    posts = db.session.query(Post).filter(Post.tags.any(Tag.id==1)).all()
+    return render_template('music.html',posts=posts)
 
 @app.route('/software.html')
 def software():
-    return render_template('software.html')
+    posts = db.session.query(Post).filter(Post.tags.any(Tag.id==3)).all()
+    return render_template('software.html',posts=posts)
 
 """
 Blogging section
@@ -113,6 +114,11 @@ def blog_post(post_id):
 @app.route('/feed.rss')
 def basic_rss():
     return render_template('rss.xml',posts=get_posts())
+
+@app.route('/blog/category/<tag_id>.html')
+def blog_category(tag_id):
+    posts = db.session.query(Post).filter(Post.tags.any(Tag.id==tag_id)).all()
+    return render_template('blog.html',posts=posts)
 
 @app.route('/admin/post/<int:post_id>/delete')
 @login_required
@@ -130,7 +136,6 @@ def edit_post(post_id):
         post = Post.query.get(post_id)
         post.title = request.form['title']
         post.text = request.form['text']
-        
         post.tags = [Tag.query.get(tag_id) for tag_id in request.form.getlist('tags')]
         db.session.commit()
         return redirect(url_for('add_post'))
@@ -140,10 +145,7 @@ def edit_post(post_id):
 def add_post():
     if request.method == 'POST':
         post = Post(request.form['title'],request.form['text'])
-        for tag_id in request.form.getlist('tags'):
-            print "TAG: %s details: %s" % (tag_id,Tag.query.get(tag_id))
         post.tags = [Tag.query.get(tag_id) for tag_id in request.form.getlist('tags')]
-        print "post tags are: %s" % (str(post.tags))
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('add_post'))

@@ -1,26 +1,4 @@
 {% extends "index.html" %}
 {% block body %}
-<div class="posts">
-{% for post in posts%}
-    <div id={{post.id}}>
-        <h2><a href="/blog/{{post.id}}.html">{{post.title}}</a></h2>
-        {% if session.logged_in %}
-        <a href="/admin/post/{{post.id}}/delete">delete</a> |
-        <a href="/admin/post/{{post.id}}/edit">edit</a>
-        {% endif %}
-        <h3>by paul, on {{post.display_date()}}</h3>
-        <p>{{ post.text|safe }}</p>
-        <p>{{ post.display_tags() }}</p>
-        <!--
-        <ul class="unstyled">
-        {% for tag in post.tags %}
-            <li>{{tag.name}}</li>
-        {% endfor %}
-        </ul>
-        -->
-    </div>
-{% else %}
-    <h2>No Posts.</h2> <p> No posts here so far</p>
-{% endfor %}
-</div>
+    {% include 'posts.html' %}
 {% endblock %}

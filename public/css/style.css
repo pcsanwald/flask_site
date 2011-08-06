@@ -286,12 +286,15 @@ footer {
     clear: both;
 }
 
+.posts {
+    padding-top: 10px;
+}
 .posts h2 {
     padding-bottom: 15px;
 }
 .posts h2 a {
     font-weight: bold;
-    font-size: 1.3em;
+    /* font-size: 1.3em; */
 }
 .posts h3 {
     font-size: 80%
