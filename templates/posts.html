@@ -1,0 +1,16 @@
+<!-- begin posts -->
+<div class="posts">
+{% for post in posts%}
+    <div id={{post.id}}>
+        <h2><a href="/blog/{{post.id}}.html">{{post.title}}</a></h2>
+        {% if session.logged_in %}
+        <a href="/admin/post/{{post.id}}/delete">delete</a> |
+        <a href="/admin/post/{{post.id}}/edit">edit</a>
+        {% endif %}
+        <h3>by paul, on {{post.display_date()}}</h3>
+        <p>{{ post.text|safe }}</p>
+        <p>{{ post.display_tags() }}</p>
+    </div>
+{% endfor %}
+</div>
+<!-- end posts -->
