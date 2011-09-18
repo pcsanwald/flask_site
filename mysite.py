@@ -7,6 +7,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from flaskext.sqlalchemy import SQLAlchemy
 from db_utils import *
 import os
+import json
 
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
@@ -22,6 +23,7 @@ PASSWORD = 'default'
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config.from_envvar('MYSITE_SETTINGS',silent=True)
+app.config['THEME'] = 'tree.json'
 
 db = SQLAlchemy(app)
 
@@ -99,6 +101,16 @@ def music():
 def software():
     posts = db.session.query(Post).filter(Post.tags.any(Tag.id==3)).all()
     return render_template('software.html',posts=posts)
+
+@app.route('/color.css')
+def color_css():
+    with app.open_resource('public/themes/%s' % (app.config['THEME'])) as defaultCSS:
+        theme = json.load(defaultCSS)
+    return render_template('color.css',theme=theme)
+
+@app.route('/color.js')
+def color_js():
+    return render_template('color.js',default_theme=app.config['THEME'])
 
 """
 Blogging section

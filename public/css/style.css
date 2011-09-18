@@ -152,41 +152,15 @@ h1, h2, /*h3,*/ h4, h5, h6 { font-weight: bold; }
    No text-shadow: twitter.com/miketaylr/status/12228805301
   Also: hot pink! */
 
-/* current colors from the excellent:
- *  http://www.colorapi.com/#!q/spring/4545404411
- * another set:
- * #1C2319 #41513D #549755 #8A6E5E #A4C4A3 #A8BD5F
- */
-::-moz-selection{ background: #444; color:#fff; text-shadow: none; }
-::selection { background:#444; color:#fff; text-shadow: none; }
-
-/* j.mp/webkit-tap-highlight-color */
-a:link { -webkit-tap-highlight-color: #768fb2; }
-a, a:active, a:visited { 
-    color: #768fb2;
-    outline: none;
-    text-decoration: none;
-}
-a:hover { color: #74a1d5; }
-body {
-    color: #555863;
-    background-color: #74A1D5;
-}
-#main img {
-    background-color: #74A1D5;
-}
-#container {
-    background: #D9dce3;
-}
-.unstyled li {
-    background-color: #555863; opacity: .5;
-    color: #74A1D5;
-}
 /**
  * Primary styles
  * Author: paul sanwald 
  */
 
+a, a:active, a:visited { 
+    outline: none;
+    text-decoration: none;
+}
 p, ul {
     padding: 10px;
 }

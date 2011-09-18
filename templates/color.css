@@ -1,0 +1,29 @@
+/* current colors from the excellent:
+ *  http://www.colorapi.com/#!q/spring/4545404411
+ * another set:
+ * #1C2319 #41513D #549755 #8A6E5E #A4C4A3 #A8BD5F
+ */
+::-moz-selection { background: #444; color:#fff; text-shadow: none; }
+::selection { background:#444; color:#fff; text-shadow: none; }
+
+/* j.mp/webkit-tap-highlight-color */
+a:link { -webkit-tap-highlight-color: {{theme.link}}; }
+a, a:active, a:visited { 
+    color: {{theme.link}};
+}
+a:hover { color: {{theme.linkHover}}; }
+body {
+    color: {{theme.text}};
+    background-color: {{theme.background}};
+}
+#main img {
+    background-color: {{theme.background}};
+}
+#container {
+    background: {{theme.foreground}};
+}
+.unstyled li {
+    background-color: {{theme.text}}; opacity: .5;
+    color: {{theme.background}};
+}
+

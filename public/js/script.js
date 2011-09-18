@@ -81,7 +81,8 @@ $(function() {
 
    theme = readCookie("theme");
     if (!theme) {
-        theme = "sky.json";
+        // theme = "sky.json";
+        theme = defaultColorScheme(); 
     } 
 /*
  * Collapse/Expand lists, drawing +/- icons for each.
