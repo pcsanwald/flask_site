@@ -23,7 +23,7 @@ PASSWORD = 'default'
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config.from_envvar('MYSITE_SETTINGS',silent=True)
-app.config['THEME'] = 'tree.json'
+app.config['THEME'] = 'sky.json'
 
 db = SQLAlchemy(app)
 
