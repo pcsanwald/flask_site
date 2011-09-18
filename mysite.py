@@ -94,12 +94,12 @@ def slash():
 
 @app.route('/music.html')
 def music():
-    posts = db.session.query(Post).order_by(Post.date).filter(Post.tags.any(Tag.id==1)).all()
+    posts = db.session.query(Post).order_by(desc(Post.date)).filter(Post.tags.any(Tag.id==1)).all()
     return render_template('music.html',posts=posts)
 
 @app.route('/software.html')
 def software():
-    posts = db.session.query(Post).order_by(Post.date).filter(Post.tags.any(Tag.id==3)).all()
+    posts = db.session.query(Post).order_by(desc(Post.date)).filter(Post.tags.any(Tag.id==3)).all()
     return render_template('software.html',posts=posts)
 
 @app.route('/color.css')
