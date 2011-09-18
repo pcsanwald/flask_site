@@ -7,7 +7,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from flaskext.sqlalchemy import SQLAlchemy
 from db_utils import *
 import os
-import json
+import simplejson
 
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
@@ -105,7 +105,7 @@ def software():
 @app.route('/color.css')
 def color_css():
     with app.open_resource('public/themes/%s' % (app.config['THEME'])) as defaultCSS:
-        theme = json.load(defaultCSS)
+        theme = simplejson.load(defaultCSS)
     return render_template('color.css',theme=theme)
 
 @app.route('/color.js')
