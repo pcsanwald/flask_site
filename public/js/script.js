@@ -73,6 +73,17 @@ function eraseCookie(name) {
     createCookie(name,"",-1);
 }
 
+function toggleElement(collapsable) {
+    $($(collapsable).attr("href")).toggle("slow", function() {
+           elementToUpdate = $('.collapser[href="#'+$(collapsable).attr('id')+'"]');
+           if ( $(collapsable).text().indexOf("+") != -1 ) {
+               $(collapsable).text($(collapsable).text().replace("+","-"));
+           } else {
+               $(collapsable).text($(collapsable).text().replace("-","+"));
+           }
+   });
+
+}
 $(function() {
    // Handler for .ready() called.
 
@@ -105,16 +116,20 @@ $(function() {
   * register a click event for when collapsers are clicked
   */
    $(".collapser").click( function() {
-       $($(this).attr("href")).toggle("slow", function() {
-           elementToUpdate = $('.collapser[href="#'+$(this).attr('id')+'"]');
-           if ( $(this).is(":visible" )) {
-               elementToUpdate.text(elementToUpdate.text().replace("+","-"));
-           } else {
-               elementToUpdate.text(elementToUpdate.text().replace("-","+"));
-           }
-       });
-       return false;
+              toggleElement(this);
+              return false;
    });
+
+   /*
+    * If there's a hash specified in the URL, open the appropriate
+    * section of the page
+    */
+    if (window.location.hash) {
+        itemToDisplay = 'a[href="'+window.location.hash+'"]';
+        toggleElement($(itemToDisplay));
+    }
+
+
    // displayThemes also changes the colors of the page based on user prefs.
    // the reason it does that is that function should be called only after
    // we are done fiddling with the content of the page.
