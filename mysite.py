@@ -23,7 +23,7 @@ PASSWORD = 'default'
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config.from_envvar('MYSITE_SETTINGS',silent=True)
-app.config['THEME'] = 'sky.json'
+app.config['THEME'] = 'halloween.json'
 
 db = SQLAlchemy(app)
 
@@ -126,6 +126,12 @@ def blog_post(post_id):
 @app.route('/feed.rss')
 def basic_rss():
     return render_template('rss.xml',posts=get_posts())
+
+@app.route('/blog/category/<tag_id>.rss')
+def rss_category(tag_id):
+    posts = db.session.query(Post).filter(Post.tags.any(Tag.id==tag_id)).all()
+    return render_template('rss.xml',posts=posts)
+
 
 @app.route('/blog/category/<tag_id>.html')
 def blog_category(tag_id):
