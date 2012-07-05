@@ -230,6 +230,10 @@ header {
     text-align: center;
 }
 
+td {
+    padding: 4px;
+}
+
 #sidebar dt {
     text-transform: uppercase;
     font-weight: bold;
